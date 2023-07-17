@@ -1,0 +1,4 @@
+0 Healthy
+1 CommonRust
+2 Blight
+3 LeafSpot

@@ -1,0 +1,15 @@
+tensorflow==2.12
+keras==2.12
+pillow==9.0.1
+flask==2.3.2
+flask-sqlalchemy==3.0.3
+SQLAlchemy==2.0.15
+Flask-Mail==0.9.1
+pyscopg2==66.0.2
+asgiref==3.7.2
+Flask-Migrate==4.0.4
+numpy==
+flask-login==
+flask-wtf==
+validator==
+wtforms==
