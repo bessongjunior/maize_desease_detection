@@ -1,14 +1,11 @@
 import os
 
-from flask            import Flask
-# from flask_sqlalchemy import SQLAlchemy
-
+from flask import Flask, render_template
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
-from quart import render_template
+# from quart import render_template
 
-from .models import db
 
 # Grabs the folder where the script runs.
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -17,10 +14,10 @@ app = Flask(__name__)
 
 app.config.from_object('app.config.Config')
 
-db = SQLAlchemy  (app) # flask-sqlalchemy
-bc = Bcrypt      (app) # flask-bcrypt
+db = SQLAlchemy(app) # flask-sqlalchemy
+bc = Bcrypt(app) # flask-bcrypt
 
-lm = LoginManager(   ) # flask-loginmanager
+lm = LoginManager() # flask-loginmanager
 lm.init_app(app)       # init the login manager
 
 # Setup database
@@ -46,4 +43,4 @@ def server_error_page(error):
     return render_template("500.html"), 500
 
 # Import routing, models and Start the App
-from app import views, models
+from app import routes, models 

@@ -14,13 +14,13 @@ from tensorflow.keras.utils import load_img, img_to_array
 from PIL import Image, ImageOps 
 
 # Flask modules
-from flask import Flask, redirect, url_for, request, render_template
+from flask import redirect, url_for, request, render_template
 from .models import RegisterForm, LoginForm, User
-from . import app, lm, bc
+from app import app, lm, bc
 from flask_login import login_required, login_user, logout_user, current_user, login_required
 from werkzeug.utils import secure_filename
 from flask_login import login_user, logout_user, current_user, login_required
-from werkzeug.exceptions import HTTPException, NotFound, abort
+# from werkzeug.exceptions import HTTPException, NotFound, abort
 # from gevent.pywsgi import WSGIServer
 
 # Define a flask app
@@ -31,11 +31,12 @@ def load_user(user_id):
 
 
 # Load your trained model
-model = load_model("./keras_Model.h5", compile=False)
+basedir = os.path.abspath(os.path.dirname(__file__))
+model = load_model(os.path.join(basedir+"/keras_Model.h5"), compile=False)
 model.make_predict_function()          # Necessary
 # print('Model loaded. Start serving...')
 # Load the labels
-class_names = open("labels.txt", "r").readlines()
+class_names = open(os.path.join(basedir+"/labels.txt"), "r").readlines()
 
 
 def model_pred(img_path, model):
@@ -114,7 +115,7 @@ def register():
 
     if request.method == 'GET': 
 
-        return render_template( 'accounts/register.html', form=form, msg=msg )
+        return render_template( 'register.html', form=form, msg=msg )
 
     # check if both http method is POST and form is valid on submit
     if form.validate_on_submit():
@@ -147,7 +148,7 @@ def register():
     else:
         msg = 'Input error'     
 
-    return render_template( 'register.html', form=form, msg=msg, success=success )
+    return render_template('register.html', form=form, msg=msg, success=success )
 
 # Authenticate user
 @app.route('/login.html', methods=['GET', 'POST'])
@@ -179,7 +180,7 @@ def login():
         else:
             msg = "Unknown user"
 
-    return render_template( 'login.html', form=form, msg=msg )
+    return render_template('login.html', form=form, msg=msg )
 
 # Logout user
 @app.route('/logout.html')

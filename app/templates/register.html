@@ -6,12 +6,60 @@
 <!-- {% block stylesheets %}{% endblock stylesheets %} -->
 
 {% block content %}
+<style>
+
+    /* body {
+      display: -ms-flexbox;
+      display: -webkit-box;
+      display: flex;
+      -ms-flex-align: center;
+      -ms-flex-pack: center;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #f5f5f5;
+    } */
+    body{background-color: #f5f5f5;justify-content: center;}
+    
+    .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    .form-signin .checkbox {
+      font-weight: 400;
+    }
+    .form-signin .form-control {
+      position: relative;
+      box-sizing: border-box;
+      height: auto;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+      z-index: 2;
+    }
+    .form-signin input[type="email"] {
+      margin-bottom: -1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    </style>
 
     <!-- Section -->
     <section class="min-vh-100 d-flex align-items-center bg-soft">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 d-flex align-items-center justify-content-center">
+                <div class="col-6 d-flex align-items-center justify-content-center">
                     <div class="signin-inner mt-3 mt-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                         <div class="text-center text-md-center mb-4 mt-md-0">
                             <h1 class="mb-0 h3">
@@ -31,54 +79,54 @@
 
                             {{ form.hidden_tag() }}
 
-                            <div class="form-group">
+                            <div class="form-label-group">
                                 <label for="exampleInputIcon3">Username</label>
                                 <div class="input-group mb-4">
-                                    <div class="input-group-prepend">
+                                    <!-- <div class="input-group-prepend">
                                         <span class="input-group-text"><span class="fas fa-user"></span></span>
-                                    </div>
+                                    </div> -->
                                     {{ form.username(class="form-control") }}
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-label-group">
                                 <label for="exampleInputIcon4">Your email</label>
                                 <div class="input-group mb-4">
-                                    <div class="input-group-prepend">
+                                    <!-- <div class="input-group-prepend">
                                         <span class="input-group-text"><span class="fas fa-envelope"></span></span>
-                                    </div>
+                                    </div> -->
                                     {{ form.email(class="form-control", type="email") }}
                                 </div>
                             </div>
                             
-                            <div class="form-group">
+                            <div class="form-label-group">
                                 <!-- Form -->
-                                <div class="form-group">
+                                <div class="form-label-group">
                                     <label for="password">Password</label>
                                     <div class="input-group mb-4">
-                                        <div class="input-group-prepend">
+                                        <!-- <div class="input-group-prepend">
                                             <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
-                                        </div>
+                                        </div> -->
                                         {{ form.password(class="form-control", type="password") }}
                                     </div>
                                 </div>
                                 <!-- End of Form -->
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <div class="form-check m-0">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                                        
                                         <label class="form-check-label" for="defaultCheck5">
-                                            I agree to the terms and conditions
+                                            <input class="form-check-input color-success" type="checkbox" value="" id="defaultCheck5">I agree to the terms and conditions
                                         </label>
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" name="register" class="btn btn-block btn-primary">Sign Up</button>
+                            <button type="submit" name="register" class="btn btn-block btn-success">Sign Up</button>
                         </form>
 
                         <div class="d-block d-sm-flex justify-content-center align-items-center mt-4">
                             <span class="font-weight-normal">
                                 Already have an account?
-                                <a href="{{ url_for('login') }}" class="font-weight-bold">Login</a>
+                                <a href="{{ url_for('login') }}" class="font-weight-bold text-success">Login</a>
                             </span>
                         </div>
                     </div>
@@ -89,7 +137,7 @@
                 <div class="col-12 d-flex align-items-center justify-content-center">
                     <br />    
                     <span class="text-muted font-small"> 
-                        &copy; <a target="_blank" href="/">COT-UB</a> - built by Chrystals</a>.
+                        &copy; <a target="_blank" href="/" class="text-success">COT-UB</a> - built by EJAH</a>.
                     </span>
                 </div>
             </div>
