@@ -1,9 +1,62 @@
-{% extends "base.html" %} {% block content %}
 
 
-<div>
+
+<!-- <div class="mt-4 align-items-center justify-content-center">
     <h1>Video Streaming Demonstration</h1>
     <img id="bg" src="{{ url_for('video_feed') }}">
-</div>
+</div> -->
 
-  {% endblock %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Real-time Video Prediction</title>
+  </head>
+  <body>
+    <h1>Real-time Video Prediction</h1>
+
+    <!-- The video element displays the video -->
+    <video id="video" width="640" height="480" autoplay></video>
+
+    <!-- The canvas element is used to capture frames from the video -->
+    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+
+    <!-- The prediction element displays the results of the model's processing -->
+    <p>Prediction: <span id="prediction"></span></p>
+
+    <script src="your_model.js"></script>
+    <script>
+      // Get references to the video, canvas, and prediction elements
+      const video = document.getElementById('video');
+      const canvas = document.getElementById('canvas');
+      const predictionElement = document.getElementById('prediction');
+
+      // Load your TensorFlow model
+      const model = await tf.loadLayersModel('your_model.json');
+
+      // Set up webcam access
+      navigator.mediaDevices
+        .getUserMedia({ video: true, audio: false })
+        .then(stream => {
+          video.srcObject = stream;
+          video.play();
+        });
+
+      // Set up an interval to capture frames from the video and make predictions
+      setInterval(() => {
+        // Capture a frame from the video
+        const context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, 640, 480);
+        const imageData = context.getImageData(0, 0, 640, 480);
+
+        // Preprocess the image data for your model
+        const image = preprocess(imageData);
+
+        // Make a prediction using your model
+        const prediction = model.predict(image);
+
+        // Display the prediction on the HTML page
+        predictionElement.textContent = prediction;
+      }, 100);
+    </script>
+  </body>
+</html>

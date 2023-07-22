@@ -14,8 +14,10 @@ from tensorflow.keras.utils import load_img, img_to_array
 from PIL import Image, ImageOps 
 
 # Flask modules
-from flask import redirect, url_for, request, render_template
-from .models import RegisterForm, LoginForm, User
+from flask import redirect, url_for, request, render_template, Response
+from .camera import VideoCamera
+from .models import User
+from .forms import RegisterForm, LoginForm
 from app import app, lm, bc
 from flask_login import login_required, login_user, logout_user, current_user, login_required
 from werkzeug.utils import secure_filename
@@ -188,3 +190,19 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+
+
+@app.route('/video')
+def realtime():
+    return render_template('realtime.html')
+
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(gen(VideoCamera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')

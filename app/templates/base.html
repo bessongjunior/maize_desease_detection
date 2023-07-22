@@ -13,12 +13,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">AI Demo</a>
-            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Help</button>
-        </div>
-    </nav>
+    
     <!-- <header>
         <div class="d-flex flex-column flex-md-row align-items-center p-5 px-md-4 mb-3 bg-white border-bottom box-shadow">
             <h5 class="my-0 mr-md-auto font-weight-normal">Maize deases Detection</h5>
@@ -32,6 +27,7 @@
             <a class="btn btn-outline-primary" href="#">Sign up</a>
           </div>
     </header> -->
+    {% include 'navbar.html' %}
     <div class="container">
         <div id="content" style="margin-top:2em">{% block content %}{% endblock %}</div>
     </div>
